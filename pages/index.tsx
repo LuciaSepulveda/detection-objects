@@ -290,7 +290,6 @@ if (typeof window !== "undefined") {
             }*/
           }
         })
-      
     }
   }
 
@@ -368,7 +367,6 @@ if (typeof window !== "undefined") {
       canvasRef !== undefined
     ) {
       webcam_init()
-      
     }
   }
 
@@ -385,10 +383,32 @@ if (typeof window !== "undefined") {
       <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></Script>
       <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></Script>
       <Script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose"></Script>
-      <main>
-        <h1>PRUEBA TENSOR FLOW</h1>
-        <video autoPlay ref={videoRef} hidden width="300" height="300"></video>
-        <canvas ref={canvasRef}></canvas>
+      <main
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <h1 style={{ margin: "auto", marginBottom: "20px", marginTop: "20px" }}>
+          PRUEBA TENSOR FLOW
+        </h1>
+        <div
+          style={{
+            width: "300px",
+            height: "300px",
+            margin: "auto",
+          }}
+        >
+          <video
+            autoPlay
+            ref={videoRef}
+            hidden
+            width="300"
+            height="300"
+          ></video>
+          <canvas ref={canvasRef}></canvas>
+        </div>
       </main>
     </div>
   )
