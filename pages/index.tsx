@@ -270,9 +270,17 @@ if (typeof window !== "undefined") {
           video: { facingMode: "user" },
         })
         .then((stream) => {
-          if (videoRef !== undefined && videoRef.current !== undefined) {
+          if (
+            videoRef !== null &&
+            videoRef !== undefined &&
+            videoRef.current !== undefined
+          ) {
             videoRef.current.srcObject = stream
-            videoRef.current.onloadeddata = () => {
+            videoRef.current.onloadedmetadata = () => {
+              videoRef.current.addEventListener("loadeddata", (e) => {
+                console.log("Loaded")
+                predictWithCocoModel()
+              })
               videoRef.current.play()
             }
             /*
@@ -282,11 +290,12 @@ if (typeof window !== "undefined") {
             }*/
           }
         })
+      
     }
   }
 
   const predictWithCocoModel = async () => {
-    if (videoRef !== undefined) {
+    if (videoRef !== null && videoRef !== undefined) {
       const model = await cocoSSD.load()
       detectFrame(videoRef.current, model)
     }
@@ -359,7 +368,7 @@ if (typeof window !== "undefined") {
       canvasRef !== undefined
     ) {
       webcam_init()
-      predictWithCocoModel()
+      
     }
   }
 
@@ -378,7 +387,7 @@ if (typeof window !== "undefined") {
       <Script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose"></Script>
       <main>
         <h1>PRUEBA TENSOR FLOW</h1>
-        <video ref={videoRef} hidden width="300" height="300"></video>
+        <video autoPlay ref={videoRef} hidden width="300" height="300"></video>
         <canvas ref={canvasRef}></canvas>
       </main>
     </div>
