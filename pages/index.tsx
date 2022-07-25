@@ -276,13 +276,11 @@ if (typeof window !== "undefined") {
             videoRef.current !== undefined
           ) {
             videoRef.current.srcObject = stream
-            videoRef.current.onloadedmetadata = () => {
-              videoRef.current.addEventListener("loadeddata", (e) => {
-                console.log("Loaded")
-                predictWithCocoModel()
-              })
+            videoRef.current.addEventListener("loadeddata", (e) => {
+              console.log("Loaded")
+              predictWithCocoModel()
               videoRef.current.play()
-            }
+            })
             /*
             videoRef.current.onloadedmetadata = () => {
               videoRef.current.play()
