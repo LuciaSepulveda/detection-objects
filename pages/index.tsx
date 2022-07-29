@@ -294,7 +294,9 @@ if (typeof window !== "undefined") {
   const predictWithCocoModel = async () => {
     if (videoRef !== null && videoRef !== undefined) {
       const model = await cocoSSD.load()
-      detectFrame(videoRef.current, model)
+      setInterval(() => {
+        detectFrame(videoRef.current, model)
+      }, 500)
     }
   }
 
